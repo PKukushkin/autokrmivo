@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>AutoKrmivo</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            /* Серый фон */
+            color: white;
+            /* Белый текст */
+            font-family: 'Arial', sans-serif;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+        }
+
+        .chartjs-render-monitor {
+            color: white;
+            /* Белый текст */
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <!-- Page content-->
+    <div class="container-fluid">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Генерируем случайные данные для диаграммы
+        var data = {
+            labels: ['Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok'],
+            datasets: [{
+                data: [25, 30, 20, 15, 10],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#9C27B0']
+            }]
+        };
+
+        // Создаем круговую диаграмму
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'right',
+                    labels: {
+                        fontSize: 14
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
